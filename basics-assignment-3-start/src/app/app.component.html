@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <ol>
+        <li class="bg-success">Add A button which says 'Display Details'</li>
+        <li class="bg-success">Add a paragraph with any content of your choice (e.g. 'Secret Password = tuna')</li>
+        <li class="bg-success">Toggle the displaying of that paragraph with the button created in the first step</li>
+        <li class="bg-success">Log all button clicks in an array and output that array below the secret paragraph (maybe log a timestamp or simply an incrementing number)</li>
+        <li class="bg-success">Starting at the 5th log item, give all future log items a blue background (via ngStyle) and white color (ngClass)</li>
+      </ol>
+      <hr>
+      <button class="btn btn-primary" (click)="onClick()">Display Details</button>
+      <p [ngClass]="{'d-none': show}">Secret Password = tuna (sa ngClass)</p>
+      <p *ngIf="!show">Secret Password = tuna (sa ngIf)</p>
+      <hr>
+      <ol>
+        <li *ngFor="let banana of bananas; index as i" [ngStyle]="{'background-color': i >= 4 ? 'blue' : 'transparent'}">
+          <p [ngClass]="{'text-light': i >= 4}">{{banana.name}} - {{banana.time}}</p>
+        </li>
+      </ol>
+    </div>
+  </div>
+</div>
+
