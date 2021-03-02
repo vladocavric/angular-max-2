@@ -1,0 +1,17 @@
+<div class="container-fluid my-3">
+    <h1>recipe book component</h1>
+  <div class="row">
+    <div class="col-5">
+      <app-recipe-list></app-recipe-list>
+    </div>
+    <div class="col-7">
+      <app-recipe-detail >
+      </app-recipe-detail>
+<!--        <ng-template #noRecipe>-->
+<!--          <p>Please select recipe</p>-->
+<!--        </ng-template>-->
+    </div>
+  </div>
+</div>
+
+<!--*ngIf="recipeSelected; else noRecipe" [recipe]="recipeSelected"-->

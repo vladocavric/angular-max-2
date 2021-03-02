@@ -1,0 +1,21 @@
+1) nakon klika na neku od recepy itema
+2) treba da se laduje recapt datog jela
+
+
+1) emit event from item component
+2)  get that event to recipe book component
+3) to pass down which item was selected
+4) work with property and event binding
+
+
+1) emit event when clicked on ling in item comp
+2) create methood in ts item file to emit this
+event outhside (also you will need Output)
+3) nothing should be emited with this output
+4) lisent to the event from parent
+(list component)
+5) emit this with recipe atached to this
+6) lisen to this event from parent
+(book component)
+7) property bind to details
+

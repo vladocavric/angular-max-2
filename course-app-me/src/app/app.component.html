@@ -1,5 +1,7 @@
-<app-header></app-header>
+<app-header (select)="selectedComp($event)"></app-header>
 
-<app-recipe-book></app-recipe-book>
-<hr>
-<app-shopping-list></app-shopping-list>
+<app-recipe-book *ngIf="select === 'recipe'"></app-recipe-book>
+<app-shopping-list *ngIf="select === 'shopping'"></app-shopping-list>
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>

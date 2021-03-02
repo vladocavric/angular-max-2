@@ -1,0 +1,39 @@
+<div *ngIf="recipe; else noRecipe">
+  <div class="row">
+    <div class="col-12">
+      <img src="{{recipe.imgPath}}" alt="slika recepta">
+      <h1 class="text-center">{{recipe.name}}</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle show" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="show = !show">
+          Manage
+        </button>
+        <div *appDropdown="show" class="dropdown-menu show" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="#" (click)="addTosl()">To Shopping List</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      {{recipe.description}}
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <h3>Ingredients</h3>
+      <div class="list-group">
+        <p class="list-group-item" *ngFor="let items of recipe.ingredients">{{items.name}} - {{items.quantity}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #noRecipe>
+  <p>Please select recipe</p>
+</ng-template>
