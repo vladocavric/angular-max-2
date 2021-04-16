@@ -1,0 +1,42 @@
+.container {
+  margin-top: 30px;
+}
+
+input.ng-invalid.ng-touched, label {
+  /*border: 1px solid red;*/
+  animation-name: slideDown2;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+.alert-danger{
+  animation-name: slideDown;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+}
+
+/*@keyframes appere {*/
+/*  form { max-height: 0}*/
+/*  to { max-height: 100%}*/
+/*}*/
+
+@keyframes slideDown{
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slideDown2{
+  from {
+    transform: translateY(-100%);
+    /*opacity: 0;*/
+  }
+  to {
+    transform: translateY(0);
+    /*opacity: 1;*/
+  }
+}

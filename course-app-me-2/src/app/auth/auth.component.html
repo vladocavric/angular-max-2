@@ -1,0 +1,25 @@
+<div class="container my-5">
+<!--  <div class="alert alert-danger" *ngIf="error">-->
+<!--    <div class="mb-3">{{error}}</div>-->
+<!--    <button class="btn btn-danger btn-300" (click)="onRemoveError()">OK</button>-->
+<!--  </div>-->
+  <app-alert [error]="error" (close)="onRemoveError()" *ngIf="error"></app-alert>
+  <div *ngIf="isLoading" style="text-align: center">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
+  <form autocomplete="on" (ngSubmit)="onSubmit(form)" #form="ngForm" *ngIf="!isLoading">
+    <div class="form-group">
+      <label for="exampleInputEmail1">Email address</label>
+      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ngModel name="email"
+             required email>
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" ngModel name="password" required
+             minlength="6">
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">{{isLoginMode ? 'Log In' : 'Sign Up' }}</button>
+    <button type="button" class="btn btn-primary mx-2" (click)="switchMode()">Switch
+      to {{isLoginMode ? 'Sign Up' : 'Log In' }}</button>
+  </form>
+</div>

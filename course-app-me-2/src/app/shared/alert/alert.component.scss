@@ -1,0 +1,26 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+  .alert-box {
+    position: fixed;
+    display: inline-block;
+    background: white;
+    width: 40vw;
+    left: calc(50% - 20vw);
+    top: 25vh;
+    padding: 15px;
+    border-radius: 5px;
+    .alert-box-actions {
+      text-align: right;
+    }
+  }
+
+

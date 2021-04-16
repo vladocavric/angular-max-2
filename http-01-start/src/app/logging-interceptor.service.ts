@@ -2,17 +2,14 @@ import {HttpEvent, HttpEventType, HttpHandler, HttpInterceptor, HttpRequest} fro
 import {Observable} from 'rxjs';
 import {tap} from 'rxjs/operators';
 
-export class AuthInterceptorService implements HttpInterceptor {
+export class LoggingInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('request is on the way')
-    console.log(req.url)
-    const modifiedUrl = req.clone({headers: req.headers.append('auth', 'xyz')})
-    return next.handle(modifiedUrl).pipe(tap(event => {
-      console.log(event)
+    return next.handle(req).pipe(tap(event => {
       if (event.type === HttpEventType.Response) {
-        console.log('response data:')
+        console.log('Incoming response')
         console.log(event.body)
       }
     }))
   }
 }
+

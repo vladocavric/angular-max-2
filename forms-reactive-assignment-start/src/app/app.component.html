@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+
+      <p class="bg-success">Create a Form with the following Controls and Validators</p>
+      <p class="bg-success">1) Project Name (should not be empty)</p>
+      <p class="bg-success">2) Mail (should not be a empty and a valid email)</p>
+      <p class="bg-success">3) Project Status Dropdown, with three values: 'Stable', 'Critical', 'Finished'</p>
+      <p class="bg-success">4) Submit Button</p>
+      <p class="bg-success">Add your own Validator which doesn't allow "Test" as a Project Name</p>
+      <p class="bg-success">Also implement that Validator as an async Validator (replace the other one)</p>
+      <p class="bg-success">Upon submitting the form, simply print the value to the console</p>
+
+      <hr>
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="projectName">
+            Project Name
+          </label>
+          <p *ngIf="projectForm.get('projectName').touched && projectForm.get('projectName').invalid " class="alert alert-warning">aaaa</p>
+          <input type="text" class="form-control" id="projectName" formControlName="projectName">
+        </div>
+        <div class="form-group">
+          <label for="email">
+            Mail
+          </label>
+          <input type="text" class="form-control" id="email" formControlName="email">
+        </div>
+        <div class="form-group">
+          <label for="status">
+            Project Status
+          </label>
+          <select name="status" id="status" class="form-control" formControlName="status">
+            <option value="null" disabled>Select your option</option>
+            <option *ngFor="let stat of status" [value]="stat">{{stat}}</option>
+          </select>
+        </div>
+        <input type="submit" class="btn btn-success">
+      </form>
+      <hr *ngIf="submitted">
+      <div *ngIf="submitted">
+        <p>Project name: {{project.name}}</p>
+        <p>Mail: {{project.mail}}</p>
+        <p>Status: {{project.status}}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

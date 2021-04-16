@@ -22,4 +22,7 @@ export class ShoppingListComponent implements OnInit {
   }
 
 
+  onStartEdit(i: number) {
+    this.slService.startEdit.next(i);
+  }
 }

@@ -2,10 +2,10 @@
   <div class="row">
     <div class="col-12">
       <h1>shopping list component</h1>
-      <app-shopping-list-edit (ingredient)="ingredients.push($event)"></app-shopping-list-edit>
+      <app-shopping-list-edit></app-shopping-list-edit>
       <hr>
       <div class="list-group">
-        <a href="#" class="list-group-item" *ngFor="let ingredient of ingredients?.reverse()">{{ingredient.name}} ({{ingredient.quantity}})</a>
+        <a class="list-group-item" *ngFor="let ingredient of ingredients?.reverse(); let i = index" (click)="onStartEdit(i)">{{ingredient.name}} ({{ingredient.quantity}})</a>
       </div>
     </div>
   </div>

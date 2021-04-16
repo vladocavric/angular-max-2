@@ -1,9 +1,9 @@
-<a href="#" class="list-group-item d-flex justify-content-between" (click)="onSelected()">
+<a class="list-group-item d-flex justify-content-between" routerLinkActive="active" [routerLink]="[index]">
   <div>
     <h4 class="list-group-item-heading">{{recipe.name}}</h4>
     <p class="list-group-item-text">{{recipe.description}}</p>
   </div>
   <span>
-        <img [src]="recipe.imgPath" alt="" style="max-height: 75px">
+        <img [src]="recipe.imagePath" alt="" style="max-height: 75px">
       </span>
 </a>
