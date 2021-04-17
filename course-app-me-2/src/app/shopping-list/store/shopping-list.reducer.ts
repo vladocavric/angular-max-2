@@ -1,15 +1,11 @@
 import {IngredientModel} from '../../shared/ingredient.model';
 import * as ShoppingListActions from './shopping-list.actions';
-import {sample} from 'rxjs/operators';
+
 
 export interface State {
   ingredients: IngredientModel[];
   editedIngredient: IngredientModel;
   editedIngredientIndex: number;
-}
-
-export interface AppState {
-  shoppingList: State;
 }
 
 const initialState = {
@@ -52,8 +48,8 @@ export function shoppingListReducer(
     case ShoppingListActions.STOP_EDIT:
       return {
         ...state,
-        editedIngredientIndex: null,
-        editedIngredient: -1
+        editedIngredientIndex: -1,
+        editedIngredient: null
       };
     default:
       return state;

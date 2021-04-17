@@ -1,30 +1,23 @@
-import {Action} from '@ngrx/store';
-import {UserModel} from '../user.model';
+import { Action } from '@ngrx/store';
 
-export const SIGN_UP = 'SIGN_UP';
-export const LOG_IN = 'LOG_IN';
-export const LOG_OUT = 'LOG_OUT';
-export const AUTO_LOGIN = 'AUTO_LOGIN';
-export const AUTO_LOGOUT = 'AUTO_LOGOUT';
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 
-export class SignUp implements Action {
-  readonly type = SIGN_UP;
-  constructor(public payload: UserModel) {
-  }
-}
-export class LogIn implements Action {
-  readonly type = LOG_IN;
-}
-export class LogOut implements Action {
-  readonly type = LOG_OUT;
-}
-export class AutoLogin implements Action {
-  readonly type = AUTO_LOGIN;
-  constructor(public payload: UserModel) {
-  }
-}
-export class AutoLogout implements Action {
-  readonly type = AUTO_LOGOUT;
+export class Login implements Action {
+  readonly type = LOGIN;
+
+  constructor(
+    public payload: {
+      email: string;
+      userId: string;
+      token: string;
+      expirationDate: Date;
+    }
+  ) {}
 }
 
-export type AuthActions = SignUp | LogIn | LogOut | AutoLogin | AutoLogout;
+export class Logout implements Action {
+  readonly type = LOGOUT;
+}
+
+export type AuthActions = Login | Logout;
