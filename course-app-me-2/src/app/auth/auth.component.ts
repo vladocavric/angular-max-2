@@ -1,9 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
-import {AuthResponseData, AuthService} from './auth.service';
-import {Observable, Subscribable, Subscription} from 'rxjs';
-import {Router} from '@angular/router';
+import {Subscription} from 'rxjs';
 import {Store} from '@ngrx/store';
+
 import * as fromApp from '../store/app.reducer';
 import * as AuthAction from './store/auth.actions';
 
@@ -19,7 +18,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   private storeSub: Subscription;
 
-  constructor(private authService: AuthService, private router: Router, private store: Store<fromApp.AppState>) {
+  constructor(private store: Store<fromApp.AppState>) {
   }
 
   ngOnInit(): void {
@@ -37,25 +36,11 @@ export class AuthComponent implements OnInit, OnDestroy {
     if (form.invalid) {
       return;
     }
-    let observableAuth: Observable<AuthResponseData>;
-    this.isLoading = true;
     if (this.isLoginMode) {
-      // observableAuth = this.authService.login(form.value.email, form.value.password);
       this.store.dispatch(new AuthAction.LoginStart({email: form.value.email, password: form.value.password}));
     } else {
-      // observableAuth = this.authService.signup(form.value.email, form.value.password);
       this.store.dispatch(new AuthAction.SignupStart({email: form.value.email, password: form.value.password}));
     }
-
-    // observableAuth.subscribe(data => {
-    //   console.log(data);
-    //   this.isLoading = false;
-    //   this.router.navigate(['../recipes']);
-    //
-    // }, errorMsg => {
-    //   this.error = errorMsg;
-    //   this.isLoading = false;
-    // });
     form.reset();
   }
 

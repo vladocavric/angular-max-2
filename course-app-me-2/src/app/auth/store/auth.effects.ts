@@ -8,6 +8,7 @@ import {of, throwError} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserModel} from '../user.model';
+import {AuthService} from '../auth.service';
 
 // import {AuthResponseData} from '../auth.service';
 
@@ -28,7 +29,8 @@ const handleAuthentication = (email: string, userId: string, token: string, expi
     email,
     userId,
     token,
-    expirationDate
+    expirationDate,
+    redirect: true
   });
 };
 const handleError = (errorRes: any) => {
@@ -62,7 +64,11 @@ export class AuthEffects {
             email: signupAction.payload.email,
             password: signupAction.payload.password,
             returnSecureToken: true
-          }).pipe(map(resData => {
+          }).pipe(
+          tap(resData => {
+            this.authService.setLogoutTimer(+resData.expiresIn * 1000);
+          }),
+          map(resData => {
             return handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
           }),
           catchError(errorRes => {
@@ -80,7 +86,11 @@ export class AuthEffects {
             email: authData.payload.email,
             password: authData.payload.password,
             returnSecureToken: true
-          }).pipe(map(resData => {
+          }).pipe(
+          tap(resData => {
+            this.authService.setLogoutTimer(+resData.expiresIn * 1000);
+          }),
+          map(resData => {
             return handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
           }),
           catchError(errorRes => {
@@ -103,28 +113,34 @@ export class AuthEffects {
     }
     const loadedUser = new UserModel(userData.email, userData.id, userData._token, new Date(userData._tokenExpirationDate));
     if (loadedUser.token) {
+      const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
+      this.authService.setLogoutTimer(expirationDuration);
       return new AuthActions.Authenticate({
         email: loadedUser.email,
         userId: loadedUser.id,
         token: loadedUser.token,
-        expirationDate: new Date(userData._tokenExpirationDate)
+        expirationDate: new Date(userData._tokenExpirationDate),
+        redirect: false
       });
-      // const expirationDuration = new Date(userData._tokenExpirationDate).getTime() - new Date().getTime();
-      // this.autoLogout(expirationDuration);
+
     }
     return {type: 'DUMMY'};
   }));
 
   @Effect({dispatch: false})
-  authRedirect = this.actions$.pipe(ofType(AuthActions.AUTHENTICATE, AuthActions.LOGOUT), tap(() => {
-    this.router.navigate(['/']);
-  }));
+  authRedirect = this.actions$.pipe(ofType(AuthActions.AUTHENTICATE, AuthActions.LOGOUT),
+    tap((authSuccessAction: AuthActions.Authenticate) => {
+      if (authSuccessAction.payload.redirect) {
+        this.router.navigate(['/']);
+      }
+    }));
 
   @Effect({dispatch: false})
   authLogout = this.actions$.pipe(ofType(AuthActions.LOGOUT), tap(() => {
+    this.authService.clertLogouttimer();
     localStorage.removeItem('userData');
   }));
 
-  constructor(private actions$: Actions, private http: HttpClient, private router: Router) {
+  constructor(private actions$: Actions, private http: HttpClient, private router: Router, private authService: AuthService) {
   }
 }

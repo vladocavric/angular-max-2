@@ -8,6 +8,8 @@ import {AppRoutingModule} from './app-routing.module';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {trigger, state, style} from '@angular/animations';
 
 @NgModule({
     declarations: [
@@ -15,12 +17,13 @@ import {CoreModule} from './core.module';
         HeaderComponent,
     ],
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({appId: 'serverApp'}),
         HttpClientModule,
         AppRoutingModule,
         ClickOutsideModule,
         SharedModule,
-        CoreModule
+        CoreModule,
+        BrowserAnimationsModule
     ],
     bootstrap: [AppComponent]
 })
